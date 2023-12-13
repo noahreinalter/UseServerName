@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "useservername",
+  "version": "${version}",
+  "name": "UseServerName",
+  "description": "Use server name to group data instead of ip",
+  "authors": [
+    "noahreinalter"
+  ],
+  "contact": {
+    "repo": "https://github.com/noahreinalter/UseServerName"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/useservername/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "eu.reinalter.noah.useservername.client.UseServerNameClient"
+    ],
+    "main": [
+      "eu.reinalter.noah.useservername.UseServerName"
+    ]
+  },
+  "mixins": [
+    "useservername.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

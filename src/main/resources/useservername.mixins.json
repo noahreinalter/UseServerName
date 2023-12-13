@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "eu.reinalter.noah.useservername.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "eu.reinalter.noah.useservername.MixinConfigPlugin",
+  "mixins": [
+  ],
+  "client": [
+    "ClientChunkManagerMixin",
+    "ClientWorldAccessor",
+    "bobby.FakeChunkManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
