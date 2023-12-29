@@ -26,7 +26,8 @@ public class FakeChunkManagerMixin {
                 String serverId = UseServerNameClient.getInstance().getServerId();
 
                 if (serverId != null) {
-                    logger.info(String.format("Bobby save data will be redirected to: %s", serverId));
+                    // logger.info(String.format("Bobby save data will be redirected to: %s",
+                    // serverId));
                     cir.setReturnValue(serverId);
                 } else {
                     logger.warn("Server id is not known Bobby will not be redirected");

@@ -4,7 +4,6 @@ import eu.reinalter.noah.useservername.UseServerName;
 import net.fabricmc.api.ClientModInitializer;
 import org.slf4j.Logger;
 
-
 public class UseServerNameClient implements ClientModInitializer {
     static UseServerNameClient instance;
     private String serverId;
@@ -26,6 +25,6 @@ public class UseServerNameClient implements ClientModInitializer {
 
     public void setServerId(String serverId) {
         this.serverId = serverId;
-        this.logger.info(String.format("Server id is: %s", this.serverId));
+        // this.logger.info(String.format("Server id is: %s", this.serverId));
     }
 }
