@@ -25,6 +25,6 @@ public class UseServerNameClient implements ClientModInitializer {
 
     public void setServerId(String serverId) {
         this.serverId = serverId;
-        // this.logger.info(String.format("Server id is: %s", this.serverId));
+        this.logger.info(String.format("Server id is: %s", this.serverId));
     }
 }
