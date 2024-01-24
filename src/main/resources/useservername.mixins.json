@@ -7,7 +7,7 @@
   "mixins": [
   ],
   "client": [
-    "ClientPlayNetworkHandlerMixin",
+    "ClientLoginNetworkHandlerMixin",
     "bobby.FakeChunkManagerMixin"
   ],
   "injectors": {

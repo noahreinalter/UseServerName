@@ -2,8 +2,8 @@ package eu.reinalter.noah.useservername.mixin;
 
 import eu.reinalter.noah.useservername.client.UseServerNameClient;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientConnectionState;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.network.ClientLoginNetworkHandler;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.network.ClientConnection;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,12 +11,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayNetworkHandler.class)
-public class ClientPlayNetworkHandlerMixin {
+import java.time.Duration;
+import java.util.function.Consumer;
+
+@Mixin(ClientLoginNetworkHandler.class)
+public class ClientLoginNetworkHandlerMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void clientPlayNetworkHandlerInit(MinecraftClient client, ClientConnection clientConnection, ClientConnectionState clientConnectionState, CallbackInfo ci) {
-        ServerInfo serverInfo = ((ClientPlayNetworkHandler)(Object)this).getServerInfo();
+    private void clientLoginNetworkHandlerInit(ClientConnection connection, MinecraftClient client, ServerInfo serverInfo, Screen parentScreen, boolean newWorld, Duration worldLoadTime, Consumer statusConsumer, CallbackInfo ci) {
         if (serverInfo != null) {
             UseServerNameClient.getInstance().setServerId(serverInfo.name);
         }
