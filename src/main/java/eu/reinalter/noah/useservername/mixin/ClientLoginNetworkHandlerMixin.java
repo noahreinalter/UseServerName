@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 public abstract class ClientLoginNetworkHandlerMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    private void clientLoginNetworkHandlerInit(ClientConnection connection, MinecraftClient client, ServerInfo serverInfo, Screen parentScreen, boolean newWorld, Duration worldLoadTime, Consumer statusConsumer, CallbackInfo ci) {
+    private void clientLoginNetworkHandlerInit(ClientConnection connection, MinecraftClient client, ServerInfo serverInfo, Screen parentScreen, boolean newWorld, Duration worldLoadTime, Consumer<?> statusConsumer, CallbackInfo ci) {
         if (serverInfo != null) {
             UseServerNameClient.getInstance().setServerId(serverInfo.name);
         }
