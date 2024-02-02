@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FakeChunkManager.class)
-public class FakeChunkManagerMixin {
+public abstract class FakeChunkManagerMixin {
     @Inject(method = "getCurrentWorldOrServerName", at = @At("RETURN"), cancellable = true)
     private static void changedCurrentWorldOrServerName(CallbackInfoReturnable<String> cir) {
         String oldReturnValue = cir.getReturnValue();

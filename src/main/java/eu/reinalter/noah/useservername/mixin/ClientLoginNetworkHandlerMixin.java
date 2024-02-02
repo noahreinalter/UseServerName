@@ -15,7 +15,7 @@ import java.time.Duration;
 import java.util.function.Consumer;
 
 @Mixin(ClientLoginNetworkHandler.class)
-public class ClientLoginNetworkHandlerMixin {
+public abstract class ClientLoginNetworkHandlerMixin {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     private void clientLoginNetworkHandlerInit(ClientConnection connection, MinecraftClient client, ServerInfo serverInfo, Screen parentScreen, boolean newWorld, Duration worldLoadTime, Consumer statusConsumer, CallbackInfo ci) {
