@@ -1,8 +1,8 @@
 package eu.reinalter.noah.useservername.client;
 
-import eu.reinalter.noah.useservername.EventManager;
 import eu.reinalter.noah.useservername.UseServerName;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ObjectShare;
 import org.slf4j.Logger;
@@ -18,7 +18,11 @@ public class UseServerNameClient implements ClientModInitializer {
         this.logger = UseServerName.getInstance().logger();
         objectShare = FabricLoader.getInstance().getObjectShare();
 
-        new EventManager();
+        new EventManagerClient();
+
+        ClientPlayNetworking.registerGlobalReceiver(UseServerName.SERVERNAME_PACKET_ID, (client, handler, buf, responseSender) -> {
+            UseServerNameClient.getInstance().setServerId(buf.readString(), true);
+        });
     }
 
     public static UseServerNameClient getInstance() {
