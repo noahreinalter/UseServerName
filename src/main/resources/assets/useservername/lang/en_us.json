@@ -1,0 +1,7 @@
+{
+  "yacl3.config.useservername:config.category.useservername": "Useservername",
+  "yacl3.config.useservername:config.preferLocalName": "Prefer local Servername",
+  "yacl3.config.useservername:config.preferLocalName.description": "If true use the server name set in the serverbrowser and not the one send by the server with this mod",
+  "yacl3.config.useservername:config.serverName": "Servername",
+  "yacl3.config.useservername:config.serverName.description": "Servername for the lan server"
+}

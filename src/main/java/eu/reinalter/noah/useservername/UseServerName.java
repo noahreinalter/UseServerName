@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.random.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +21,9 @@ public class UseServerName implements ModInitializer {
         LOGGER = LoggerFactory.getLogger(NAMESPACE);
 
         LOGGER.info("Started Use Server Name mod");
+
+        UseServerNameConfig.HANDLER.load();
+        UseServerNameConfig.HANDLER.save();
 
         this.setupServerEvent();
     }
@@ -39,10 +41,9 @@ public class UseServerName implements ModInitializer {
     }
 
     private void setupServerEvent() {
-        int id = Random.create().nextBetween(1, 255);
         ServerPlayConnectionEvents.INIT.register(((handler, server) -> {
             PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeString(String.format("Minecraft-Server-%d", id));
+            buf.writeString(UseServerNameConfig.HANDLER.instance().serverName);
             ServerPlayNetworking.send(handler.player, SERVERNAME_PACKET_ID, buf);
         }));
     }
