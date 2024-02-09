@@ -8,6 +8,8 @@
     "noahreinalter"
   ],
   "contact": {
+    "homepage": "https://modrinth.com/mod/use-server-name",
+    "issues": "https://github.com/noahreinalter/UseServerName/issues",
     "repo": "https://github.com/noahreinalter/UseServerName"
   },
   "license": "GPL-3.0",
@@ -19,12 +21,17 @@
     ],
     "main": [
       "eu.reinalter.noah.useservername.UseServerName"
+    ],
+    "modmenu": [
+      "eu.reinalter.noah.useservername.client.MenuIntegration"
     ]
   },
   "mixins": [
     "useservername.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=${loader_version}"
+    "fabricloader": ">=${loader_version}",
+    "fabric": ">=${fabric_version}",
+    "yet_another_config_lib_v3": "*"
   }
 }

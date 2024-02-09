@@ -7,7 +7,6 @@
   "mixins": [
   ],
   "client": [
-    "ClientLoginNetworkHandlerMixin",
     "bobby.FakeChunkManagerMixin"
   ],
   "injectors": {
