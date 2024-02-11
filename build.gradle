@@ -36,6 +36,8 @@ dependencies {
     modImplementation("dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}")
 
     modCompileOnlyApi "maven.modrinth:${project.bobby_id}:${project.bobby_version}"
+    modCompileOnlyApi "maven.modrinth:${project.xaero_minimap_id}:${project.xaero_minimap_version}"
+    modCompileOnlyApi "maven.modrinth:${project.xaero_worldmap_id}:${project.xaero_worldmap_version}"
 }
 
 processResources {

@@ -11,6 +11,8 @@ import java.util.Set;
 public class MixinConfigPlugin implements IMixinConfigPlugin {
 
     private final boolean hasBobby = FabricLoader.getInstance().isModLoaded("bobby");
+    private final boolean hasXaeroMinimap = FabricLoader.getInstance().isModLoaded("xaerominimap");
+    private final boolean hasXaeroWorldmap = FabricLoader.getInstance().isModLoaded("xaeroworldmap");
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -26,6 +28,12 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains(".bobby.")) {
             return hasBobby;
+        }
+        if (mixinClassName.contains(".xaero.minimap.")) {
+            return hasXaeroMinimap;
+        }
+        if (mixinClassName.contains(".xaero.worldmap.")) {
+            return hasXaeroWorldmap;
         }
         return true;
     }
