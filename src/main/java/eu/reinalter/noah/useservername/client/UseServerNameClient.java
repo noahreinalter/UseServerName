@@ -8,9 +8,13 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ObjectShare;
 import org.slf4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
+
 public class UseServerNameClient implements ClientModInitializer {
     static UseServerNameClient instance;
     private static ObjectShare objectShare;
+    private static final String BASE_DIRECTORY = FabricLoader.getInstance().getGameDir().toAbsolutePath().toString();
     private Logger logger;
 
     @Override
@@ -32,6 +36,11 @@ public class UseServerNameClient implements ClientModInitializer {
     }
 
     public void setServerId(String serverId, boolean overwrite) {
+        if(!checkIfPathIsSafe(serverId)) {
+            this.logger.warn("Tried to set serverId to String with Path Traversal");
+            return;
+        }
+
         if (overwrite) {
             objectShare.put(String.format("%s:serverId", UseServerName.NAMESPACE), serverId);
         } else {
@@ -46,5 +55,15 @@ public class UseServerNameClient implements ClientModInitializer {
 
     private void registerReceiver() {
         ClientPlayNetworking.registerGlobalReceiver(UseServerName.SERVERNAME_PACKET_ID, (client, handler, buf, responseSender) -> UseServerNameClient.getInstance().setServerId(buf.readString(), !UseServerNameConfig.HANDLER.instance().preferLocalName));
+    }
+
+    private boolean checkIfPathIsSafe(String path) {
+        File file = new File(BASE_DIRECTORY, path);
+
+        try {
+            return file.getCanonicalPath().startsWith(BASE_DIRECTORY);
+        } catch (IOException e) {
+            return false;
+        }
     }
 }
