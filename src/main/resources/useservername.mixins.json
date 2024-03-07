@@ -7,7 +7,9 @@
   "mixins": [
   ],
   "client": [
-    "bobby.FakeChunkManagerMixin"
+    "bobby.FakeChunkManagerMixin",
+    "xaero.minimap.WaypointsManagerMixin",
+    "xaero.worldmap.MapProcessorMixin"
   ],
   "injectors": {
     "defaultRequire": 1
