@@ -37,8 +37,6 @@ public class UseServerName implements ModInitializer {
     }
 
     private void setupServerEvent() {
-        ServerConfigurationConnectionEvents.CONFIGURE.register((handler, server) -> {
-            ServerConfigurationNetworking.send(handler, new ServerNamePacket(UseServerNameConfig.HANDLER.instance().serverName));
-        });
+        ServerConfigurationConnectionEvents.CONFIGURE.register((handler, server) -> ServerConfigurationNetworking.send(handler, new ServerNamePacket(UseServerNameConfig.HANDLER.instance().serverName)));
     }
 }

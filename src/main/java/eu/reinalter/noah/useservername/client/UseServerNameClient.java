@@ -55,9 +55,7 @@ public class UseServerNameClient implements ClientModInitializer {
     }
 
     private void registerReceiver() {
-        ClientConfigurationNetworking.registerGlobalReceiver(ServerNamePacket.PACKET_ID, (payload, context) -> {
-            UseServerNameClient.getInstance().setServerId(payload.ServerName(), false);
-        });
+        ClientConfigurationNetworking.registerGlobalReceiver(ServerNamePacket.PACKET_ID, (payload, context) -> UseServerNameClient.getInstance().setServerId(payload.ServerName(), false));
     }
 
     private boolean checkIfPathIsSafe(String path) {
