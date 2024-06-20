@@ -12,7 +12,7 @@ public class EventManagerClient {
         ClientPlayConnectionEvents.INIT.register(((handler, client) -> {
             ServerInfo serverInfo = handler.getServerInfo();
             if (serverInfo != null) {
-                UseServerNameClient.getInstance().setServerId(serverInfo.name, false);
+                UseServerNameClient.getInstance().setServerId(serverInfo.name, true);
             }
         }));
     }
