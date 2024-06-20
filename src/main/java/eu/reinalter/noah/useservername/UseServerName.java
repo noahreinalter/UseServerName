@@ -1,18 +1,13 @@
 package eu.reinalter.noah.useservername;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
+import net.fabricmc.fabric.api.networking.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UseServerName implements ModInitializer {
     private static Logger LOGGER;
     public static final String NAMESPACE = "useservername";
-    public static final Identifier SERVERNAME_PACKET_ID = new Identifier(NAMESPACE, "servername");
     static UseServerName instance;
 
     @Override
@@ -22,6 +17,7 @@ public class UseServerName implements ModInitializer {
 
         LOGGER.info("Started Use Server Name mod");
 
+        PayloadTypeRegistry.configurationS2C().register(ServerNamePacket.PACKET_ID, ServerNamePacket.PACKET_CODEC);
         UseServerNameConfig.HANDLER.load();
         UseServerNameConfig.HANDLER.save();
 
@@ -41,10 +37,6 @@ public class UseServerName implements ModInitializer {
     }
 
     private void setupServerEvent() {
-        ServerPlayConnectionEvents.INIT.register(((handler, server) -> {
-            PacketByteBuf buf = PacketByteBufs.create();
-            buf.writeString(UseServerNameConfig.HANDLER.instance().serverName);
-            ServerPlayNetworking.send(handler.player, SERVERNAME_PACKET_ID, buf);
-        }));
+        ServerConfigurationConnectionEvents.CONFIGURE.register((handler, server) -> ServerConfigurationNetworking.send(handler, new ServerNamePacket(UseServerNameConfig.HANDLER.instance().serverName)));
     }
 }

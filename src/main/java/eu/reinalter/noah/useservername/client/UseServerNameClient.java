@@ -1,9 +1,10 @@
 package eu.reinalter.noah.useservername.client;
 
+import eu.reinalter.noah.useservername.ServerNamePacket;
 import eu.reinalter.noah.useservername.UseServerName;
 import eu.reinalter.noah.useservername.UseServerNameConfig;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.networking.v1.ClientConfigurationNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ObjectShare;
 import org.slf4j.Logger;
@@ -35,13 +36,13 @@ public class UseServerNameClient implements ClientModInitializer {
         return (String) objectShare.get(String.format("%s:serverId", UseServerName.NAMESPACE));
     }
 
-    public void setServerId(String serverId, boolean overwrite) {
-        if(!checkIfPathIsSafe(serverId)) {
-            this.logger.warn("Tried to set serverId to String with Path Traversal");
+    public void setServerId(String serverId, boolean localName) {
+        if (!checkIfPathIsSafe(serverId)) {
+            this.logger.warn("Tried to set serverId to String with Path Traversal or invalid characters");
             return;
         }
 
-        if (overwrite) {
+        if (UseServerNameConfig.HANDLER.instance().preferLocalName == localName) {
             objectShare.put(String.format("%s:serverId", UseServerName.NAMESPACE), serverId);
         } else {
             objectShare.putIfAbsent(String.format("%s:serverId", UseServerName.NAMESPACE), serverId);
@@ -54,7 +55,7 @@ public class UseServerNameClient implements ClientModInitializer {
     }
 
     private void registerReceiver() {
-        ClientPlayNetworking.registerGlobalReceiver(UseServerName.SERVERNAME_PACKET_ID, (client, handler, buf, responseSender) -> UseServerNameClient.getInstance().setServerId(buf.readString(), !UseServerNameConfig.HANDLER.instance().preferLocalName));
+        ClientConfigurationNetworking.registerGlobalReceiver(ServerNamePacket.PACKET_ID, (payload, context) -> UseServerNameClient.getInstance().setServerId(payload.ServerName(), false));
     }
 
     private boolean checkIfPathIsSafe(String path) {
