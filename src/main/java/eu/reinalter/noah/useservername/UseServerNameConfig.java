@@ -14,6 +14,7 @@ import net.minecraft.util.Identifier;
 import java.util.Random;
 
 public class UseServerNameConfig {
+    // General
     private static final String CATEGORY = "useservername";
     @AutoGen(category = CATEGORY)
     @CustomDescription("yacl3.config.useservername:config.preferLocalName.description")
@@ -26,7 +27,36 @@ public class UseServerNameConfig {
     @StringField
     @SerialEntry(comment = "Servername that is send from the server")
     public String serverName = generateServerName();
-    public static ConfigClassHandler<UseServerNameConfig> HANDLER = ConfigClassHandler.createBuilder(UseServerNameConfig.class)
+
+    //Mods
+    private static final String MODS = "mods";
+
+    @AutoGen(category = MODS)
+    @CustomDescription("yacl3.config.useservername:config.bobby.description")
+    @TickBox
+    @SerialEntry(comment = "Client only")
+    public boolean bobby = true;
+
+    @AutoGen(category = MODS)
+    @CustomDescription("yacl3.config.useservername:config.distanthorizons.description")
+    @TickBox
+    @SerialEntry(comment = "Client only")
+    public boolean distanthorizons = true;
+
+    @AutoGen(category = MODS)
+    @CustomDescription("yacl3.config.useservername:config.xaero_minimap.description")
+    @TickBox
+    @SerialEntry(comment = "Client only")
+    public boolean xaero_minimap = true;
+
+    @AutoGen(category = MODS)
+    @CustomDescription("yacl3.config.useservername:config.xaero_worldmap.description")
+    @TickBox
+    @SerialEntry(comment = "Client only")
+    public boolean xaero_worldmap = true;
+
+    public static ConfigClassHandler<UseServerNameConfig> HANDLER = ConfigClassHandler
+            .createBuilder(UseServerNameConfig.class)
             .id(Identifier.of(UseServerName.NAMESPACE, "config"))
             .serializer(config -> GsonConfigSerializerBuilder.create(config)
                     .setPath(FabricLoader.getInstance().getConfigDir().resolve("useservername.json5"))

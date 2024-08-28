@@ -3,6 +3,7 @@ package eu.reinalter.noah.useservername.mixin.distanthorizons;
 import com.seibel.distanthorizons.core.file.structure.ClientOnlySaveStructure;
 import com.seibel.distanthorizons.core.wrapperInterfaces.minecraft.IMinecraftClientWrapper;
 import eu.reinalter.noah.useservername.UseServerName;
+import eu.reinalter.noah.useservername.UseServerNameConfig;
 import eu.reinalter.noah.useservername.client.UseServerNameClient;
 import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
@@ -20,7 +21,7 @@ public abstract class ClientOnlySaveStructureMixin {
 
     @Inject(method = "getServerFolderName", at = @At("HEAD"), cancellable = true, remap = false)
     private static void changedServerFolderName(CallbackInfoReturnable<String> cir) {
-        if (!MC_CLIENT.connectedToReplay()) {
+        if (!MC_CLIENT.connectedToReplay() && UseServerNameConfig.HANDLER.instance().distanthorizons) {
             Logger logger = UseServerName.getInstance().logger();
             String serverId = UseServerNameClient.getInstance().getServerId();
 
