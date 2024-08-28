@@ -3,5 +3,14 @@
   "yacl3.config.useservername:config.preferLocalName": "Prefer local Servername",
   "yacl3.config.useservername:config.preferLocalName.description": "If true use the server name set in the serverbrowser and not the one send by the server with this mod",
   "yacl3.config.useservername:config.serverName": "Servername",
-  "yacl3.config.useservername:config.serverName.description": "Servername for the lan server"
+  "yacl3.config.useservername:config.serverName.description": "Servername for the lan server",
+  "yacl3.config.useservername:config.category.mods": "Mods",
+  "yacl3.config.useservername:config.bobby": "Bobby",
+  "yacl3.config.useservername:config.bobby.description": "Enable or disable mod for Bobby",
+  "yacl3.config.useservername:config.distanthorizons": "Distant Horizons",
+  "yacl3.config.useservername:config.distanthorizons.description": "Enable or disable mod for Distant Horizons",
+  "yacl3.config.useservername:config.xaero_minimap": "Xaero's Minimap",
+  "yacl3.config.useservername:config.xaero_minimap.description": "Enable or disable mod for Xaero's Minimap",
+  "yacl3.config.useservername:config.xaero_worldmap": "Xaero's Worldmap",
+  "yacl3.config.useservername:config.xaero_worldmap.description": "Enable or disable mod for Xaero's Worldmap"
 }

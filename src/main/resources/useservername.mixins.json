@@ -9,7 +9,8 @@
   "client": [
     "bobby.FakeChunkManagerMixin",
     "xaero.minimap.WaypointsManagerMixin",
-    "xaero.worldmap.MapProcessorMixin"
+    "xaero.worldmap.MapProcessorMixin",
+    "distanthorizons.ClientOnlySaveStructureMixin"
   ],
   "injectors": {
     "defaultRequire": 1

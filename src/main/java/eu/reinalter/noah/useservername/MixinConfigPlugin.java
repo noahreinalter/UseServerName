@@ -13,6 +13,7 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
     private final boolean hasBobby = FabricLoader.getInstance().isModLoaded("bobby");
     private final boolean hasXaeroMinimap = FabricLoader.getInstance().isModLoaded("xaerominimap");
     private final boolean hasXaeroWorldmap = FabricLoader.getInstance().isModLoaded("xaeroworldmap");
+    private final boolean hasdistanthorizons = FabricLoader.getInstance().isModLoaded("distanthorizons");
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -34,6 +35,9 @@ public class MixinConfigPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.contains(".xaero.worldmap.")) {
             return hasXaeroWorldmap;
+        }
+        if (mixinClassName.contains(".distanthorizons.")) {
+            return hasdistanthorizons;
         }
         return true;
     }
