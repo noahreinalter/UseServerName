@@ -24,3 +24,4 @@ Currently, supported mods:
 * [Bobby](https://modrinth.com/mod/bobby)
 * [Xaero's Minimap](https://modrinth.com/mod/xaeros-minimap)
 * [Xaero's Worldmap](https://modrinth.com/mod/xaeros-world-map)
+* [Distant Horizons](https://modrinth.com/mod/distanthorizons)

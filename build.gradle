@@ -42,6 +42,7 @@ dependencies {
     modCompileOnlyApi "maven.modrinth:${project.bobby_id}:${project.bobby_version}"
     modCompileOnlyApi "maven.modrinth:${project.xaero_minimap_id}:${project.xaero_minimap_version}"
     modCompileOnlyApi "maven.modrinth:${project.xaero_worldmap_id}:${project.xaero_worldmap_version}"
+    modCompileOnlyApi "maven.modrinth:${project.distant_horizons_id}:${project.distant_horizons_version}"
 }
 
 processResources {
