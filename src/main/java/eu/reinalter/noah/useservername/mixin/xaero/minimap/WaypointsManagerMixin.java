@@ -13,8 +13,10 @@ import xaero.common.minimap.waypoints.WaypointsManager;
 
 @Mixin(WaypointsManager.class)
 public abstract class WaypointsManagerMixin {
-    @Inject(method = "getMainContainer", at = @At("RETURN"), cancellable = true)
-    private void changedMainContainer(boolean preIP6Fix, ClientPlayNetworkHandler connection, CallbackInfoReturnable<String> cir) {
+    @Inject(method = "getMainContainer(ILnet/minecraft/client/network/ClientPlayNetworkHandler;)Ljava/lang/String;",
+            at = @At("RETURN"), cancellable = true)
+    private void changedMainContainer(int version, ClientPlayNetworkHandler connection,
+                                      CallbackInfoReturnable<String> cir) {
         if (UseServerNameConfig.HANDLER.instance().xaero_minimap) {
             String oldReturnValue = cir.getReturnValue();
             Logger logger = UseServerName.getInstance().logger();
