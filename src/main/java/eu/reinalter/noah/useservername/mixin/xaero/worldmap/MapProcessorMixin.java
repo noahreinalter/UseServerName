@@ -13,8 +13,9 @@ import xaero.map.MapProcessor;
 
 @Mixin(MapProcessor.class)
 public abstract class MapProcessorMixin {
-    @Inject(method = "getMainId", at = @At("RETURN"), cancellable = true)
-    private void changedMainId(boolean rootFolderFormat, boolean preIP6Fix, ClientPlayNetworkHandler connection, CallbackInfoReturnable<String> cir) {
+    @Inject(method = "getMainId(ILnet/minecraft/client/network/ClientPlayNetworkHandler;)Ljava/lang/String;",
+            at = @At("RETURN"), cancellable = true)
+    private void changedMainId(int version, ClientPlayNetworkHandler connection, CallbackInfoReturnable<String> cir) {
         if (UseServerNameConfig.HANDLER.instance().xaero_worldmap) {
             String oldReturnValue = cir.getReturnValue();
             Logger logger = UseServerName.getInstance().logger();
