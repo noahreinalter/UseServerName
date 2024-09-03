@@ -33,5 +33,9 @@
     "fabricloader": ">=${loader_version}",
     "fabric": ">=${fabric_version}",
     "yet_another_config_lib_v3": "*"
+  },
+  "breaks": {
+    "xaerominimap": "<24.4.0",
+    "xaeroworldmap": "<1.39.0"
   }
 }

@@ -9,23 +9,23 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import xaero.common.minimap.waypoints.WaypointsManager;
+import xaero.hud.minimap.module.MinimapSession;
+import xaero.hud.minimap.world.state.MinimapWorldStateUpdater;
+import xaero.hud.path.XaeroPath;
 
-@Mixin(WaypointsManager.class)
-public abstract class WaypointsManagerMixin {
-    @Inject(method = "getMainContainer(ILnet/minecraft/client/network/ClientPlayNetworkHandler;)Ljava/lang/String;",
-            at = @At("RETURN"), cancellable = true)
-    private void changedMainContainer(int version, ClientPlayNetworkHandler connection,
-                                      CallbackInfoReturnable<String> cir) {
+@Mixin(MinimapWorldStateUpdater.class)
+public abstract class MinimapWorldStateUpdaterMixin {
+    @Inject(method = "getAutoRootContainerPath(ILnet/minecraft/client/network/ClientPlayNetworkHandler;Lxaero/hud/minimap/module/MinimapSession;)Lxaero/hud/path/XaeroPath;", at = @At("RETURN"), cancellable = true)
+    private void convertWorldDimFilesToFolders(int version, ClientPlayNetworkHandler connection, MinimapSession session, CallbackInfoReturnable<XaeroPath> cir) {
         if (UseServerNameConfig.HANDLER.instance().xaero_minimap) {
-            String oldReturnValue = cir.getReturnValue();
+            XaeroPath oldReturnValue = cir.getReturnValue();
             Logger logger = UseServerName.getInstance().logger();
 
-            if (oldReturnValue.startsWith("Multiplayer_")) {
+            if (oldReturnValue.toString().startsWith("Multiplayer_")) {
                 String serverId = UseServerNameClient.getInstance().getServerId();
 
                 if (serverId != null) {
-                    cir.setReturnValue(String.format("Multiplayer_%s", serverId));
+                    cir.setReturnValue(XaeroPath.root(String.format("Multiplayer_%s", serverId)));
                 } else {
                     logger.warn("Server id is not known Xaero's Minimap will not be redirected");
                     cir.setReturnValue(oldReturnValue);
