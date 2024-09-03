@@ -19,7 +19,7 @@ public abstract class ClientOnlySaveStructureMixin {
     @Shadow(remap = false)
     private static IMinecraftClientWrapper MC_CLIENT;
 
-    @Inject(method = "getServerFolderName", at = @At("HEAD"), cancellable = true, remap = false)
+    @Inject(method = "getServerFolderName()Ljava/lang/String;", at = @At("HEAD"), cancellable = true, remap = false)
     private static void changedServerFolderName(CallbackInfoReturnable<String> cir) {
         if (!MC_CLIENT.connectedToReplay() && UseServerNameConfig.HANDLER.instance().distanthorizons) {
             Logger logger = UseServerName.getInstance().logger();

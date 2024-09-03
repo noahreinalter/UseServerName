@@ -36,6 +36,7 @@
   },
   "breaks": {
     "xaerominimap": "<24.4.0",
-    "xaeroworldmap": "<1.39.0"
+    "xaeroworldmap": "<1.39.0",
+    "distanthorizons": "<2.2.0-a"
   }
 }
