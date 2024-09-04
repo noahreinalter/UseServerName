@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FakeChunkManager.class)
 public abstract class FakeChunkManagerMixin {
-    @Inject(method = "getCurrentWorldOrServerName", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getCurrentWorldOrServerName(Lnet/minecraft/client/network/ClientPlayNetworkHandler;)Ljava/lang/String;", at = @At("RETURN"), cancellable = true)
     private static void changedCurrentWorldOrServerName(CallbackInfoReturnable<String> cir) {
         if (UseServerNameConfig.HANDLER.instance().bobby) {
             String oldReturnValue = cir.getReturnValue();
