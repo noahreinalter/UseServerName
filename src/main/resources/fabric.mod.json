@@ -35,9 +35,9 @@
     "yet_another_config_lib_v3": "*"
   },
   "breaks": {
-    "xaerominimap": "<24.4.0",
-    "xaeroworldmap": "<1.39.0",
+    "xaerominimap": "<25.2.14",
+    "xaeroworldmap": "<1.39.17",
     "distanthorizons": "<2.2.0-a",
-    "bobby": "<5.2.2"
+    "bobby": "<5.2.10"
   }
 }
